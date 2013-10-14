@@ -1,11 +1,10 @@
 package com.example.android.imagesearch;
 
-import com.loopj.android.image.SmartImageView;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.loopj.android.image.SmartImageView;
 
 public class ImageDisplayActivity extends Activity {
 
