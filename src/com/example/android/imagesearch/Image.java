@@ -1,12 +1,15 @@
 package com.example.android.imagesearch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Image {
+public class Image implements Serializable {
+	
+	private static final long serialVersionUID = 752647115123776147L;
 
 	private String url;
 	private String thumbnailUrl;

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 public class MainActivity extends Activity {
 
@@ -45,7 +46,7 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View parent, int position,long rowId) {
 				Intent i = new Intent(getApplicationContext(),ImageDisplayActivity.class);
 				Image image = imageResults.get(position);
-				i.putExtra("url", image.getUrl());
+				i.putExtra("url", image);
 				startActivity(i);
 			}
 		});
@@ -62,19 +63,22 @@ public class MainActivity extends Activity {
 		
 		AsyncHttpClient client = new AsyncHttpClient();
 		// https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=fuzzy%20monkey&imgcolor=blue&imgsz=medium&imgtype=photo&rsz=8&start=3&as_sitesearch=photobucket.com
-		String url = new Uri.Builder()
-				.scheme("https")
-				.path("//ajax.googleapis.com/ajax/services/search/images")
-				.appendQueryParameter("v","1.0")
-				.appendQueryParameter("rsz", "8")
-				.appendQueryParameter("start", "0")
-				.appendQueryParameter("imgsz", "medium")
-				.appendQueryParameter("q", query).toString();
+//		String url = new Uri.Builder()
+//				.scheme("https")
+//				.path("//ajax.googleapis.com/ajax/services/search/images")
+//				.appendQueryParameter("v","1.0")
+//				.appendQueryParameter("rsz", "8")
+//				.appendQueryParameter("start", "0")
+//				.appendQueryParameter("imgsz", "medium")
+//				.appendQueryParameter("q", query).toString();
 
 		Toast.makeText(this, "Search for " + query, Toast.LENGTH_SHORT).show();
-		String url2 = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&start=0&imgsz=medium&q=" + Uri.encode(query);
-		Log.d("DEBUG", url + "," +  url2 + "," +  (url.equals(url2)));		
-		client.get(url2, new JsonHttpResponseHandler() {
+		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&start=0";
+		RequestParams params = new RequestParams();
+		params.put("imgsz", "medium");
+		params.put("q", Uri.encode(query));
+		Log.d("DEBUG", url);		
+		client.get(url, params, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
 				try {
