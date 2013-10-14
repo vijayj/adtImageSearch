@@ -1,0 +1,4 @@
+a simple settings object that is serializable
+setup action bar with gear icon
+setup ability to popup activity when the gear icon is clicked
+defaulted settings and some ideas for request params
