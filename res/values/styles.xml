@@ -16,5 +16,16 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+     <style name="ImageTheme"
+           parent="android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/ImageActionBar</item>
+    </style>
+    
+     <style name="ImageActionBar"
+           parent="android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#333366</item>
+    </style>
+     
 
 </resources>

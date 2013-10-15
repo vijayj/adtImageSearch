@@ -1,22 +1,24 @@
 package com.example.android.imagesearch;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Image implements Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Image implements Parcelable {
 	
-	private static final long serialVersionUID = 752647115123776147L;
 
 	private String url;
 	private String thumbnailUrl;
 	private String title;
+	private static final String DEFAULT = "http://cdn.panasonic.com/images/imageNotFound400.jpg";
 
 	public Image(JSONObject object) throws JSONException {
-		this.url = object.getString("url");
+		this.url = object.getString("url") == null ? DEFAULT : object.getString("url");
 		this.thumbnailUrl = object.getString("tbUrl");
 		this.title = object.getString("title");
 	}
@@ -58,9 +60,34 @@ public class Image implements Serializable {
 		}
 		return images;
 	}
+	
+	protected Image(Parcel in) {
+        url = in.readString();
+        thumbnailUrl = in.readString();
+        title = in.readString();
+    }
 
-	// public void setUrl(String url) {
-	// this.url = url;
-	// }
+    @Override
+	public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(url);
+        dest.writeString(thumbnailUrl);
+        dest.writeString(title);
+    }
+
+    public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
+        @Override
+		public Image createFromParcel(Parcel in) {
+            return new Image(in);
+        }
+
+        @Override
+		public Image[] newArray(int size) {
+            return new Image[size];
+        }
+    };
 }

@@ -12,10 +12,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -28,9 +28,9 @@ public class MainActivity extends Activity {
 
 	private EditText etQuery;
 	private GridView gvResults;
-	private Button btnSearch;
 	private ArrayList<Image> imageResults = new ArrayList<Image>();
 	private ImageListAdapter imageListAdapter;
+	private Settings settings = new Settings();
 	
 
 	@Override
@@ -54,29 +54,26 @@ public class MainActivity extends Activity {
 
 	private void setupViewHandlers() {
 		etQuery = (EditText) findViewById(R.id.etQuery);
-		btnSearch = (Button) findViewById(R.id.btnSearch);
+//		btnSearch = (Button) findViewById(R.id.btnSearch);
 		gvResults = (GridView) findViewById(R.id.gvResults);
 	}
 
+
+	public void onChangeSettings(View v) {
+		Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+	}
+	
 	public void onImageSearch(View v) {
 		String query = etQuery.getText().toString();
 		
 		AsyncHttpClient client = new AsyncHttpClient();
-		// https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=fuzzy%20monkey&imgcolor=blue&imgsz=medium&imgtype=photo&rsz=8&start=3&as_sitesearch=photobucket.com
-//		String url = new Uri.Builder()
-//				.scheme("https")
-//				.path("//ajax.googleapis.com/ajax/services/search/images")
-//				.appendQueryParameter("v","1.0")
-//				.appendQueryParameter("rsz", "8")
-//				.appendQueryParameter("start", "0")
-//				.appendQueryParameter("imgsz", "medium")
-//				.appendQueryParameter("q", query).toString();
-
 		Toast.makeText(this, "Search for " + query, Toast.LENGTH_SHORT).show();
 		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&start=0";
 		RequestParams params = new RequestParams();
-		params.put("imgsz", "medium");
+		
 		params.put("q", Uri.encode(query));
+		addUserSettings(params);
+		
 		Log.d("DEBUG", url);		
 		client.get(url, params, new JsonHttpResponseHandler() {
 			@Override
@@ -95,6 +92,31 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+	}
+
+	private void addUserSettings(RequestParams params) {
+		addParam(params, "imgsz", settings.getSize());	
+		addParam(params, "imgcolor", settings.getColor());	
+		addParam(params, "imgtype", settings.getType());	
+		addParam(params, "as_sitesearch", settings.getSite());	
+	}
+
+	private void addParam(RequestParams params, String key, String value) {
+		if(!value.isEmpty()){
+			params.put(key, Uri.encode(value));
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_settings:
+	            Toast.makeText(getApplicationContext(), "options", Toast.LENGTH_SHORT).show();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	@Override
