@@ -1,4 +1,4 @@
-package com.example.android.imagesearch;
+package com.example.android.imagesearch.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -62,6 +62,28 @@ public class Settings implements Parcelable {
 
 	public String getSite() {
 		return site;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	@Override
+	public String toString() {
+		return "Settings [color=" + color + ", size=" + size + ", type=" + type
+				+ ", site=" + site + "]";
 	}
 
 }

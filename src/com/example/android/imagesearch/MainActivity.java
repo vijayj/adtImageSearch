@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.android.imagesearch.models.Image;
+import com.example.android.imagesearch.models.Settings;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -59,10 +61,19 @@ public class MainActivity extends Activity {
 	}
 
 
-	public void onChangeSettings(View v) {
-		Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+	private void openChangeSettings() {
+		Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+		i.putExtra("settings", this.settings);
+		startActivityForResult(i, 999);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 999 && resultCode == RESULT_OK){
+			this.settings = (Settings)data.getParcelableExtra("settings");
+		}
+	}
+
 	public void onImageSearch(View v) {
 		String query = etQuery.getText().toString();
 		
@@ -74,7 +85,7 @@ public class MainActivity extends Activity {
 		params.put("q", Uri.encode(query));
 		addUserSettings(params);
 		
-		Log.d("DEBUG", url);		
+		Log.d("DEBUG", url + " : " + params);		
 		client.get(url, params, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
@@ -112,7 +123,8 @@ public class MainActivity extends Activity {
 		// Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_settings:
-	            Toast.makeText(getApplicationContext(), "options", Toast.LENGTH_SHORT).show();
+//	            Toast.makeText(getApplicationContext(), "options", Toast.LENGTH_SHORT).show();
+	            this.openChangeSettings();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

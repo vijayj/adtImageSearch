@@ -1,4 +1,4 @@
-package com.example.android.imagesearch;
+package com.example.android.imagesearch.models;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import android.os.Parcelable;
 
 public class Image implements Parcelable {
 	
-
+	
 	private String url;
 	private String thumbnailUrl;
 	private String title;

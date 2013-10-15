@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.example.android.imagesearch.R;
+import com.example.android.imagesearch.models.Image;
 import com.loopj.android.image.SmartImageView;
 
 public class ImageDisplayActivity extends Activity {

@@ -8,5 +8,9 @@
     <string name="seachHint">Enter Search Term</string>
     <string name="title_activity_image_display">ImageDisplay</string>
     <string name="ivDisplay">ivDisplay</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="saveSettings">save</string>
+    <string name="lblSite">Site</string>
+    <string name="lblColor">Color</string>
 
 </resources>

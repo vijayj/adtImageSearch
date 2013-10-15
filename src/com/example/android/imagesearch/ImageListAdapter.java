@@ -2,6 +2,7 @@ package com.example.android.imagesearch;
 
 import java.util.List;
 
+import com.example.android.imagesearch.models.Image;
 import com.loopj.android.image.SmartImageView;
 
 import android.content.Context;

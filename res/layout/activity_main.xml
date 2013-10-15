@@ -33,9 +33,9 @@
         android:id="@+id/gvResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/btnSearch"
         android:layout_below="@+id/btnSearch"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="20dp"
         android:numColumns="3" >
     </GridView>
 
