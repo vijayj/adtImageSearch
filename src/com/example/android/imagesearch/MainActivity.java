@@ -1,6 +1,7 @@
 package com.example.android.imagesearch;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,10 +107,10 @@ public class MainActivity extends Activity {
 	}
 
 	private void addUserSettings(RequestParams params) {
-		addParam(params, "imgsz", settings.getSize());	
-		addParam(params, "imgcolor", settings.getColor());	
-		addParam(params, "imgtype", settings.getType());	
-		addParam(params, "as_sitesearch", settings.getSite());	
+		addParam(params, "imgsz", settings.getSize().toLowerCase(Locale.US));	
+		addParam(params, "imgcolor", settings.getColor().toLowerCase(Locale.US));	
+		addParam(params, "imgtype", settings.getType().toLowerCase(Locale.US));	
+		addParam(params, "as_sitesearch", settings.getSite().toLowerCase(Locale.US));	
 	}
 
 	private void addParam(RequestParams params, String key, String value) {

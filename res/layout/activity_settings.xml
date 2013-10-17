@@ -8,49 +8,88 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SettingsActivity" >
 
-    <Button
-        android:id="@+id/saveSettings"
+    <TextView
+        android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/lblType"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/saveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="38dp"
-        android:layout_marginLeft="46dp"
+        android:layout_marginBottom="32dp"
+        android:layout_toRightOf="@+id/textView2"
         android:onClick="onSaveSettings"
         android:text="@string/saveSettings" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etSite"
-        android:text="@string/lblSite"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <EditText
         android:id="@+id/etSite"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/saveSettings"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="144dp"
+        android:layout_alignLeft="@+id/sbSize"
+        android:layout_below="@+id/sbSize"
         android:ems="10"
         android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/sbColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sbType"
+        android:layout_toRightOf="@+id/TextView01"
+        android:entries="@array/color_types"
+        android:gravity="fill_horizontal|right"
+        android:prompt="@string/color_prompt"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/sbSize"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sbColor"
+        android:layout_below="@+id/sbColor"
+        android:entries="@array/size_types" />
+
+    <Spinner
+        android:id="@+id/sbType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sbColor"
+        android:layout_alignParentTop="true"
+        android:entries="@array/face_types"
+        android:gravity="fill_horizontal|right" />
 
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_alignTop="@+id/sbColor"
         android:text="@string/lblColor"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Spinner
-        android:id="@+id/spinner1"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/TextView01" />
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignTop="@+id/sbSize"
+        android:text="@string/tvSize"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etSite"
+        android:layout_alignBottom="@+id/etSite"
+        android:layout_toLeftOf="@+id/etSite"
+        android:text="@string/lblSite"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
 </RelativeLayout>

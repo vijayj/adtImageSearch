@@ -12,5 +12,8 @@
     <string name="saveSettings">save</string>
     <string name="lblSite">Site</string>
     <string name="lblColor">Color</string>
+    <string name="color_prompt">Color</string>
+    <string name="lblType">Type</string>
+    <string name="tvSize">Size</string>
 
 </resources>

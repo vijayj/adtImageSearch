@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="color_types">
+		<item>Blue</item>
+		<item>Brown</item>
+		<item>Gray</item>
+		<item>Green</item>
+		<item>Orange</item>
+		<item>Pink</item>
+		<item>Purple</item>
+		<item>Red</item>
+		<item>Teal</item>
+		<item>White</item>
+		<item>Yellow</item>
+	</string-array>    
+	
+  <string-array name="face_types">
+		<item>Face</item>
+		<item>Photo</item>
+		<item>Clipart</item>
+		<item>Lineart</item>
+	</string-array>    
+	
+  <string-array name="size_types">
+		<item>icon</item>
+		<item>medium</item>
+		<item>xxlarge</item>
+		<item>huge</item>
+	</string-array>    
+	
+</resources>
+
