@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="color_types">
+		<item></item>
 		<item>Blue</item>
 		<item>Brown</item>
 		<item>Gray</item>
@@ -15,6 +16,7 @@
 	</string-array>    
 	
   <string-array name="face_types">
+        <item></item>
 		<item>Face</item>
 		<item>Photo</item>
 		<item>Clipart</item>
@@ -22,6 +24,7 @@
 	</string-array>    
 	
   <string-array name="size_types">
+		<item></item>
 		<item>icon</item>
 		<item>medium</item>
 		<item>xxlarge</item>

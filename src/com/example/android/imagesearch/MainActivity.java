@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.android.imagesearch.models.Image;
 import com.example.android.imagesearch.models.Settings;
@@ -44,13 +43,20 @@ public class MainActivity extends Activity {
 		imageListAdapter = new ImageListAdapter(this, imageResults);
 		gvResults.setAdapter(imageListAdapter);
 		gvResults.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View parent, int position,long rowId) {
 				Intent i = new Intent(getApplicationContext(),ImageDisplayActivity.class);
 				Image image = imageResults.get(position);
 				i.putExtra("url", image);
 				startActivity(i);
+			}
+		});
+		gvResults.setOnScrollListener(new EndlessScrollListener() {
+			
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				loadimages(totalItemsCount);	
+				
 			}
 		});
 	}
@@ -76,14 +82,20 @@ public class MainActivity extends Activity {
 	}
 
 	public void onImageSearch(View v) {
+		imageListAdapter.clear();
+		loadimages(0);
+	}
+
+	private void loadimages(int startIndex) {
 		String query = etQuery.getText().toString();
 		
 		AsyncHttpClient client = new AsyncHttpClient();
-		Toast.makeText(this, "Search for " + query, Toast.LENGTH_SHORT).show();
-		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&start=0";
+//		Toast.makeText(this, "Search for " + query, Toast.LENGTH_SHORT).show();
+		String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8";
 		RequestParams params = new RequestParams();
 		
 		params.put("q", Uri.encode(query));
+		params.put("start", "" + startIndex);
 		addUserSettings(params);
 		
 		Log.d("DEBUG", url + " : " + params);		
@@ -92,10 +104,7 @@ public class MainActivity extends Activity {
 			public void onSuccess(JSONObject response) {
 				try {
 					 JSONArray results = response.getJSONObject("responseData")
-							.getJSONArray("results");
-					imageResults.clear();
-//					imageResults.addAll(Image.fromJSONArray(results));
-//					imageListAdapter.notifyDataSetChanged();
+							.getJSONArray("results");					
 					imageListAdapter.addAll(Image.fromJSONArray(results));
 					Log.d("DEBUG", imageResults.toString());
 				} catch (JSONException e) {
